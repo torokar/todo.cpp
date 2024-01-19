@@ -16,17 +16,20 @@ void print(int number) {
 }
 
 int main() {
+	
 	setlocale(LC_ALL, "ru");
 	char input;
 	bool isNew = true;
 
-	print("Какую задачу вы хотите добавить?");
-	print("Выберите нужный вам параметр.");
-	print("1. Cоздание новой задачи. ");
-	print("2. Обновить задачу. ");
-	print("3. Удаления задачи. ");
-	print("4. Просмотр  задач. ");
-	cout << ("Введите нужный вам параметр. ");
+	print("      Консольный задачник");
+	print("\n");
+	print("   Выберите нужный вам параметр.");
+	print("\n");
+	print("   1. Cоздание новой задачи. ");
+	print("   2. Обновить задачу. ");
+	print("   3. Удаления задачи. ");
+	print("   4. Просмотр  задач. ");
+	cout << ("   Введите нужный вам параметр. ");
 	cin >> input;
 
 	// Выбор параметра 
@@ -34,8 +37,20 @@ int main() {
 	case '1':
 		print("Создание новой задачи.");
 		if (isNew != false) {
-			;
+			cout << "Введите имя файла. " << endl;
+			string fileName;
+			cin >> fileName;
+			fileName += ".txt";
+			ofstream save(fileName);
+			if (save.is_open()) {
+
+				save.close();
+			}
 		}
+		else {
+			cout << "Файл не создан. " << endl;
+		}
+
 		break;
 	case '2':
 		print("2. Обновить задач. ");
