@@ -11,16 +11,13 @@ using namespace std;
 void print(string word) {
 	cout << word << endl;
 }
-void print(int number) {
-	cout << number << endl;
-}
 
 int main() {
 	
 	setlocale(LC_ALL, "ru");
 	char input;
 	bool isNew = true;
-
+	// Выбор нужного пользователю параметра 
 	print("      Консольный задачник");
 	print("\n");
 	print("   Выберите нужный вам параметр.");
@@ -36,14 +33,14 @@ int main() {
 	switch (input) {
 	case '1':
 		print("Создание новой задачи.");
-		if (isNew != false) {
+		if (isNew != false) { // Создание текстового файла. пользователь сам выбирает название 
 			cout << "Введите имя файла. " << endl;
 			string fileName;
 			cin >> fileName;
 			fileName += ".txt";
-			ofstream save(fileName);
+			ofstream save(fileName, ios_base::out);
 			if (save.is_open()) {
-
+				cout << "file is open";
 				save.close();
 			}
 		}
