@@ -13,8 +13,10 @@ void print(string word) {
 }
 
 int main() {
-	
-	setlocale(LC_ALL, "ru");
+	setlocale(LC_ALL, "Russia");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
 	char input;
 	bool isNew = true;
 	// ¬ыбор нужного пользователю параметра 
