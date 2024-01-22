@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
+#include "windows.h"
 using namespace std;
 
 void print(string word) {
@@ -13,11 +13,15 @@ void print(string word) {
 }
 
 int main() {
-	
-	setlocale(LC_ALL, "ru");
+	setlocale(LC_ALL, "Russian");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
 	char input;
 	bool isNew = true;
-	// Выбор нужного пользователю параметра 
+	string text;
+
+	// Выбор нужного пользователю параметра; 
 	print("      Консольный задачник");
 	print("\n");
 	print("   Выберите нужный вам параметр.");
@@ -28,6 +32,7 @@ int main() {
 	print("   4. Просмотр  задач. ");
 	cout << ("   Введите нужный вам параметр. ");
 	cin >> input;
+	cin.ignore();
 
 	// Выбор параметра 
 	switch (input) {
@@ -35,17 +40,22 @@ int main() {
 		print("Создание новой задачи.");
 		if (isNew != false) { // Создание текстового файла. пользователь сам выбирает название 
 			cout << "Введите имя файла. " << endl;
+			cin >> text 
 			string fileName;
-			cin >> fileName;
+			getline(cin, fileName);
 			fileName += ".txt";
 			ofstream save(fileName, ios_base::out);
+			//нужен код который будет записывать в текстовый редактор задачи пользователя!!! 
 			if (save.is_open()) {
-				cout << "file is open";
+				print("Файл открыт. ");
+				print("Введите ваш текст. ");
+				fileName >> text;
 				save.close();
+				print("Задача создана. ");
 			}
 		}
 		else {
-			cout << "Файл не создан. " << endl;
+			print("Файл не создан. ");
 		}
 
 		break;
