@@ -6,12 +6,17 @@
 #include <string>
 #include <fstream>
 #include "windows.h"
+
 using namespace std;
 
 void print(string word) {
 	cout << word << endl;
 }
+bool isTextFile(const string& Ndoc) {
 
+	string txtfile = Ndoc.substr(Ndoc.find_last_of('.') + 1);
+	return (txtfile == "txt");
+}
 int main() {
 	setlocale(LC_ALL, "Russian");
 	SetConsoleCP(1251);
@@ -30,7 +35,10 @@ int main() {
 	print("   2. Обновить задачу. ");
 	print("   3. Удаления задачи. ");
 	print("   4. Просмотр  задач. ");
+	print("   5. Просмотр задач. ");
+	print("   6. Поставить пароль на задачу. ");
 	cout << ("   Введите нужный вам параметр. ");
+
 	cin >> input;
 	cin.ignore();
 
@@ -38,29 +46,36 @@ int main() {
 	switch (input) {
 	case '1':
 		print("Создание новой задачи.");
+
 		if (isNew != false) { // Создание текстового файла. пользователь сам выбирает название 
-			cout << "Введите имя файла. " << endl;
-			cin >> text 
+
+			print("Введите имя файла. ");
+
 			string fileName;
 			getline(cin, fileName);
 			fileName += ".txt";
+			ofstream fileName("D:\\C++\\ИРНИТУ учебные работы\\todo.cpp\\задачи.txt");
+			print("Файл открыт. ");
+
 			ofstream save(fileName, ios_base::out);
-			//нужен код который будет записывать в текстовый редактор задачи пользователя!!! 
+			print("Введите ваш текст. ");
+			getline(cin, text);
+			
 			if (save.is_open()) {
-				print("Файл открыт. ");
-				print("Введите ваш текст. ");
-				fileName >> text;
+				save << text;
+				
 				save.close();
-				print("Задача создана. ");
+				print("Файл закрыт. ");
 			}
 		}
 		else {
 			print("Файл не создан. ");
 		}
-
 		break;
 	case '2':
-		print("2. Обновить задач. ");
+		print("2. Обновить задачу. ");
+		
+
 		break;
 	case '3':
 		print("3. Удаления задач. ");
@@ -68,11 +83,15 @@ int main() {
 	case '4':
 		print("4. Просмотр  задач. ");
 		break;
+	case '5':
+		print("5. Просмотр задач. ");
+		break;
+	case '6':
+		print("6. Поставить пароль на задачу. ");
+		break;
 	default:
 		print("Такого параметра нет.");
 		break;
 	}
-
- 
 	return 0;
 }
