@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
+#include "windows.h"
 using namespace std;
 
 void print(string word) {
@@ -19,7 +19,9 @@ int main() {
 
 	char input;
 	bool isNew = true;
-	// Выбор нужного пользователю параметра 
+	string text;
+
+	// Выбор нужного пользователю параметра; 
 	print("      Консольный задачник");
 	print("\n");
 	print("   Выберите нужный вам параметр.");
@@ -30,19 +32,23 @@ int main() {
 	print("   4. Просмотр  задач. ");
 	cout << ("   Введите нужный вам параметр. ");
 	cin >> input;
+	cin.ignore();
 
 	// Выбор параметра 
 	switch (input) {
 	case '1':
 		print("Создание новой задачи.");
 		if (isNew != false) { // Создание текстового файла. пользователь сам выбирает название 
-			cout << "Введите имя файла. " << endl;
+			print("Введите имя файла. ");
 			string fileName;
-			cin >> fileName;
+			getline(cin, fileName);
 			fileName += ".txt";
 			ofstream save(fileName, ios_base::out);
+			print("Введите ваш текст. ");
+			getline(cin, text);
+			print("Файл открыт. ");
 			if (save.is_open()) {
-				cout << "file is open";
+				save << text;
 				save.close();
 			}
 		}
